@@ -154,6 +154,9 @@ have_libpfm
 
 test_ust_raw
 
+detect_lttng_modules_installed
+
+skip $? "LTTng modules not detected. Skipping all tests." 9 ||
 skip $isroot "Root access is needed for kernel testing, skipping." 9 ||
 {
 	modprobe lttng-test

@@ -323,6 +323,19 @@ function conf_proc_count()
 	echo
 }
 
+# Check if target rootfs have installed lttng modules.
+# Return 0 if target rootfs don't have lttng module
+function detect_lttng_modules_installed ()
+{
+	# Check for modules
+	KMOD_PATH=`modprobe lttng-tracer -n -v |cut -d ' ' -f2`
+	if [ -f $KMOD_PATH ]; then
+		return 1
+	fi
+
+	return 0
+}
+
 # Check if base lttng-modules are present.
 # Bail out on failure
 function validate_lttng_modules_present ()
